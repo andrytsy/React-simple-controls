@@ -1,14 +1,19 @@
-import React from 'react';
-import UsersList from '../users-list'
+import React from 'react'
 import Authorization from '../authorization'
+import TasksList from '../tasks-list'
+import TaskForm from '../task-form'
+import './styles.scss'
 
 function Main() {
   return (
     <div>
       <Authorization />
-      <UsersList />
+      <div className="main-wrapper">
+        <TasksList />
+        <TaskForm />
+      </div>
     </div>
   );
 }
 
-export default Main;
+export default Main

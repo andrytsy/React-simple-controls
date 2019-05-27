@@ -1,0 +1,24 @@
+.task-form__row {
+    margin: 10px 0px
+}
+
+.task-form__row-name {
+    min-width: 100px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.task-form__row-input {
+    width: 200px;
+    vertical-align: top;
+}
+
+.task-form__wraning_show {
+    color: red;
+    font-weight: 800;
+    margin: 5px 0px;
+}
+
+.task-form__wraning_hide {
+    display: none;
+}

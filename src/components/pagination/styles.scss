@@ -1,0 +1,29 @@
+@mixin user-select() {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    user-select: none; 
+}
+$border-color: #eee;
+
+.pagination {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    list-style: none;
+}
+
+.pagination__item {
+    padding: 5px 10px;
+    margin: 0px 2px;
+    border: 1px solid $border-color;
+    cursor: pointer;
+    @include user-select();
+
+    &:hover {
+        background-color: $border-color;
+    }
+}
+
+.pagination__item_active {
+    background-color: $border-color;
+}

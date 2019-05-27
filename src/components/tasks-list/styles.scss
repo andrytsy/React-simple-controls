@@ -1,0 +1,58 @@
+
+@mixin radius($n) {
+    border-radius: $n;
+    -moz-border-radius: $n;
+    -webkit-border-radius: $n;
+}
+$active: #eee;
+$border: 1px solid $active;
+$table-padding: 10px 5px;
+
+.tasks-list {
+    margin: 10px 0px;
+}
+
+.tasks-list__header-item td {
+    border-top: $border;
+    border-bottom: $border;
+    font-weight: 800;
+    font-size: 16px;
+    padding: $table-padding;
+    cursor: pointer;
+}
+
+.tasks-list__item {
+    &:hover {
+        background-color: $active;
+    }
+}
+
+.tasks-list__item_active {
+    background-color: $active;
+}
+
+.tasks-list__item td {
+    border-bottom: $border;
+    padding: $table-padding;
+    max-width: 500px;
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
+}
+
+.tasks-list__status-item {
+    padding: 5px;
+    margin-right: 5px;
+    @include radius(20px);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.tasks-list__status-item_done {
+    background-color: green; 
+    
+}
+
+.tasks-list__status-item_active {
+    background-color: orange; 
+}
