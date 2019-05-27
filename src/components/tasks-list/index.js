@@ -21,16 +21,17 @@ class TaskList extends Component {
 
     componentDidUpdate() {
         const { fetchData, isNeedUpdate } = this.props
+        
         if (isNeedUpdate) {
-            console.log('isNeedUpdate', isNeedUpdate)
-            fetchData()   
+            fetchData(this.state.sortBy, this.state.sortDir, this.state.currentPage)   
         }
     }
 
     componentDidMount() {
         const { fetchData } = this.props
+
         if (fetchData) {
-            fetchData()   
+            fetchData(this.state.sortBy, this.state.sortDir, this.state.currentPage)   
         }
     }
     
