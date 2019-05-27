@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { connect } from 'react-redux'
-import { signIn } from '../../ac'
+import { signIn, logout } from '../../ac'
 import './styles.scss'
 
 class Authorization extends Component {
@@ -14,8 +14,28 @@ class Authorization extends Component {
     }
 
     render() {
+        const { token } = this.props
+
         return (
             <div className="authorization">
+                { token ? this.getGreeting() : this.getAuthForm()}
+                <span className="authorization__field">
+                    <input type="button" 
+                        value = { this.getBtnText() } 
+                        onClick = { this.submitHandler.bind(this) }
+                    />
+                </span>
+            </div>
+        )
+    }
+
+    getGreeting() {
+        return 'Hi, Admin!'
+    }
+
+    getAuthForm() {
+        return (
+            <Fragment>
                 <span className="authorization__field">
                     Login: 
                 </span>
@@ -30,19 +50,32 @@ class Authorization extends Component {
                     value = { this.state.pwd }
                     onChange = { this.inputHandler.bind(this, 'pwd') }
                 />
-                <span className="authorization__field">
-                    <input type="button" 
-                    value="sign in" 
-                    onClick = { this.submitHandler.bind(this) }/>
-                </span>
-            </div>
+            </Fragment>
         )
     }
 
+    getBtnText() {
+        const { token } = this.props
+
+        return token ? 'Logout' : 'Sign in'
+    }
+
     submitHandler() {
-        const { signIn } = this.props
-        signIn(this.state.login, this.state.pwd)
+        const { signIn, logout, token } = this.props
+
+        if (!token) {
+            signIn(this.state.login, this.state.pwd)
+            this.clearStateFields()
+        } else {
+            logout()
+        }
+    }
+
+    clearStateFields() {
+        for (let key in this.state) {
+            this.setState({[key]: ''})
+        }
     }
 }
 
-export default connect(state => (state), { signIn })(Authorization)
+export default connect(state => (state), { signIn, logout })(Authorization)

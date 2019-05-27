@@ -1,5 +1,4 @@
-import { ADD_TASK, GET_TASKS, FAIL } from '../constants'
-import { getTasks } from '../ac'
+import { FAIL } from '../constants'
 
 export default store => next => action => {
     const { url, header, type } = action

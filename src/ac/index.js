@@ -1,4 +1,4 @@
-import { GET_TASKS, ADD_TASK, EDIT_TASK, SIGN_IN, SERVER_URL, DEVELOPER_LOGIN } from '../constants'
+import { GET_TASKS, ADD_TASK, EDIT_TASK, SIGN_IN, LOGOUT, SERVER_URL, DEVELOPER_LOGIN } from '../constants'
 
 export function getTasks(sortBy = 'id', sortDir = 'asc', page = 0) {
     return {
@@ -72,5 +72,11 @@ export function signIn(username, password) {
             body: form,
             dataType: "json"
         }
+    }
+}
+
+export function logout() {
+    return {
+        type: LOGOUT
     }
 }
