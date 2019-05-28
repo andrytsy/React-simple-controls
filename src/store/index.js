@@ -10,7 +10,6 @@ const composeEnhancers =
             // Specify extension’s options like name, actionsBlacklist, actionsCreators, serialize...
         }) : compose
 
-
 const enhancer = composeEnhancers(applyMiddleware(API, sessionStore))
 const store = createStore(reducer, enhancer)
 

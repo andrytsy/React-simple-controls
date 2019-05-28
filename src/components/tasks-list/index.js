@@ -60,7 +60,7 @@ class TaskList extends Component {
     }
 
     taskStatusHandler(event) {
-        let editableTaskStatus = event.target.value
+        let editableTaskStatus = event.target.checked ? 10 : 0
         this.setState({ editableTaskStatus })
     }
 
