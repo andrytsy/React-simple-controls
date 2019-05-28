@@ -14,7 +14,4 @@ const composeEnhancers =
 const enhancer = composeEnhancers(applyMiddleware(API, sessionStore))
 const store = createStore(reducer, enhancer)
 
-// dev only 
-window.store = store
-
 export default store

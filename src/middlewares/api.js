@@ -8,9 +8,8 @@ export default store => next => action => {
     fetch(url, header)
         .then((res) => res.json())
         .then(response => {
-            if (response.status === 'ok') {
+            if (response.status === 'ok')
                 return next({ type: type, data: response.message })
-            }
         })
         .catch(error => next({ type: type + FAIL, error }))
 }

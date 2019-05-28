@@ -9,27 +9,25 @@ export default (state = {tasks: []}, action) => {
 
         case ADD_TASK:
             return {
-                tasks: [],
+                ...state,
                 needUpdate: true
             }
 
         case EDIT_TASK:
             return {
-                tasks: [],
+                ...state,
                 needUpdate: true
             }
         
         case SIGN_IN:
             return {
-                tasks: state.tasks.slice(),
-                total_task_count: state.total_task_count,
+                ...state,
                 token: data.token
             }
 
         case LOGOUT:
             return {
-                tasks: state.tasks.slice(),
-                total_task_count: state.total_task_count,
+                ...state,
                 token: null
             }
 

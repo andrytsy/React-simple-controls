@@ -10,6 +10,5 @@ export const SERVER_URL = 'https://uxcandy.com/~shapoval/test-task-backend/v2'
 export const DEVELOPER_LOGIN = 'mr_front'
 
 // statuses
-export const START = '_START'
 export const SUCCESS = '_SUCCESS'
 export const FAIL = '_FAIL'

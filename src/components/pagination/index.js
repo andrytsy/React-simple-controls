@@ -14,7 +14,7 @@ class Pagination extends Component {
         return (
             <ul className="pagination" onClick = { this.pageChangeHangler.bind(this) }>
                 {
-                    pages >= 2
+                    pages > 1
                         ? this.getPaginationElements()
                         : null
                 }
@@ -27,11 +27,18 @@ class Pagination extends Component {
         let elements = []
 
         for (let i = 1; i <= pages; i++) {
-            let elem = <li key = {i} className = { 
-                    i === currentPage 
-                        ? 'pagination__item pagination__item_active' 
-                        : 'pagination__item' 
-                }>{ i }</li>
+            let elem = (
+                <li 
+                    key = {i} 
+                    className = { 
+                        i === currentPage 
+                            ? 'pagination__item pagination__item_active' 
+                            : 'pagination__item'
+                    }
+                >
+                    { i }
+                </li>
+            )
             elements.push(elem)
         }
         

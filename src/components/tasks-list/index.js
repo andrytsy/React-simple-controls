@@ -19,49 +19,46 @@ class TaskList extends Component {
         editableTaskText: null
     }
 
-    componentDidUpdate() {
-        const { fetchData, isNeedUpdate } = this.props
-        
-        if (isNeedUpdate) {
-            fetchData(this.state.sortBy, this.state.sortDir, this.state.currentPage)   
-        }
-    }
-
     componentDidMount() {
         const { fetchData } = this.props
 
-        if (fetchData) {
+        if (fetchData)
             fetchData(this.state.sortBy, this.state.sortDir, this.state.currentPage)   
-        }
     }
     
-    changePageHandler = currentPage => {
-        if (!this.state.editableTaskId) {
-            const { fetchData } = this.props
-            this.setState({ currentPage })
+    componentDidUpdate() {
+        const { fetchData, isNeedUpdate } = this.props
+        
+        if (isNeedUpdate)
+            fetchData(this.state.sortBy, this.state.sortDir, this.state.currentPage)
+    }
 
-            fetchData(this.state.sortBy, this.state.sortDir, currentPage)
-        }
+    changePageHandler = currentPage => {
+        if (this.state.editableTaskId) return
+
+        const { fetchData } = this.props
+
+        this.setState({ currentPage })
+        fetchData(this.state.sortBy, this.state.sortDir, currentPage)
     }
 
     sortHandler(event) {
-        if (!this.state.editableTaskId) {
-            const { fetchData } = this.props
-            let sortBy = event.target.innerText.toLowerCase()
-            var sortDir = this.state.sortDir
+        if (this.state.editableTaskId) return
 
-            if (sortBy === this.state.sortBy) {
-                sortDir = sortDir === 'asc' ? 'desc' : 'asc'
-                this.setState({ sortDir })
-            } else {
-                this.setState({ sortBy })
-            }
-            
-            fetchData(sortBy, sortDir, this.state.currentPage)
+        const { fetchData } = this.props
+        let sortBy = event.target.innerText.toLowerCase()
+        var sortDir = this.state.sortDir
+
+        if (sortBy === this.state.sortBy) {
+            sortDir = sortDir === 'asc' ? 'desc' : 'asc'
+            this.setState({ sortDir })
+        } else {
+            this.setState({ sortBy })
         }
+        
+        fetchData(sortBy, sortDir, this.state.currentPage)
     }
 
-    
     taskStatusHandler(event) {
         let editableTaskStatus = event.target.value
         this.setState({ editableTaskStatus })
@@ -84,6 +81,7 @@ class TaskList extends Component {
 
     saveChangeHandler() {
         const { token, saveEdit } = this.props
+
         if (token) {
             let task = {
                 id: this.state.editableTaskId,
@@ -109,7 +107,11 @@ class TaskList extends Component {
         return (
             <div>
                 <h4>Task list</h4>
-                { tasks.length ? this.getTasksTable() : this.getEmptyListMessage() }
+                {
+                    tasks.length
+                        ? this.getTasksTable()
+                        : this.getEmptyListMessage()
+                }
                 <Pagination 
                     pages = { pages } 
                     currentPage = { this.state.currentPage } 
@@ -120,7 +122,7 @@ class TaskList extends Component {
     }
 
     getPagesQuantity(count) {
-        return Number(count) / 3
+        return Math.ceil(Number(count) / 3)
     }
 
     getTasksTable() {
@@ -143,7 +145,7 @@ class TaskList extends Component {
     }
 
     getEmptyListMessage() {
-        return <h5>You havent current tasks.</h5>
+        return <h5>You haven't tasks.</h5>
     }
 
     getTaskList() {
@@ -168,7 +170,10 @@ class TaskList extends Component {
                 <td>{ task.username }</td>
                 <td>{ task.email }</td>
                 <td>
-                    <textarea value = { this.state.editableTaskText } onChange = { this.taskTextHandler.bind(this) } />
+                    <textarea 
+                        value = { this.state.editableTaskText } 
+                        onChange = { this.taskTextHandler.bind(this) } 
+                    />
                 </td>
                 <td>
                     <input type="button" value="Save" onClick = { this.saveChangeHandler.bind(this) } />
@@ -190,7 +195,13 @@ class TaskList extends Component {
                 <td>{ task.username }</td>
                 <td>{ task.email }</td>
                 <td title = { task.text }>{ task.text }</td>
-                <td>{ token ? <input type="button" value="Edit" onClick = { this.editTaskHandler.bind(this, task) } />  : null }</td>
+                <td>
+                    { 
+                        token 
+                            ? <input type="button" value="Edit" onClick = { this.editTaskHandler.bind(this, task) } />  
+                            : null 
+                    }
+                </td>
             </tr>
         )
     }
